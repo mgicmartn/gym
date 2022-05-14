@@ -1,7 +1,11 @@
 import gym
-env = gym.make('CartPole-v0')
-env.reset()
+env = gym.make("LunarLander-v2")
+observation, info = env.reset(seed=42, return_info=True)
 for _ in range(1000):
-    env.render()
-    env.step(env.action_space.sample()) # take a random action
+   env.render()
+   action = policy(observation)  # User-defined policy function
+   observation, reward, done, info = env.step(action)
+
+   if done:
+      observation, info = env.reset(return_info=True)
 env.close()
